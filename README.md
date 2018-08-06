@@ -101,7 +101,7 @@ x.x.x.x
 x.x.x.x  
 
 [wlc:vars]  
-connection=local  
+ansible_connection=local  
 user=username   
 pass=password   
 
