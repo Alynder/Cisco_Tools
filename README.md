@@ -8,7 +8,7 @@ Each of these is using network cli the suggested set up for the inventor log in 
 I dropped in a timeout due to some of the commands/functions taking a decent amount of time that being said you don't want it to automatically timeout. The base time out will always be 10.
 
 
-Upgrade.yaml:
+**Upgrade.yaml:**
 
 > Example inventory configuration
 ``` 
@@ -32,7 +32,7 @@ Does 3850 upgrades from the http server based on what install is required. Not a
 
 
 
-pass_change.yaml:  
+**pass_change.yaml:**  
 
 > Example inventory configuration   
 
