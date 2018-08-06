@@ -1,0 +1,54 @@
+---
+
+- name: Network Password Change
+  hosts: devices
+  gather_facts: no
+
+  tasks:
+
+    - name: IOS User Update
+      ios_user:
+        name: "{{ ansible_user }}"
+        configure_password: "{{ new_pass }}"
+        update_password: always
+        state: present
+      when: inventory_hostname in groups['ios']
+
+    - name: IOS-XR User Update
+      iosxr_user:
+        name: "{{ ansible_user }}"
+        configure_password: "{{ new_pass }}"
+        update_password: always
+        state: present
+      when: inventory_hostname in groups['iosxr']
+
+    - name: ASA User Update
+      asa_config:
+        lines:
+          - enable password "{{ new_pass }}"
+          - username admin password "{{ new_pass }}" privilege 15
+        provider:
+          username: "{{ user }}"
+          password: "{{ pass }}"
+          authorize: yes
+          auth_pass: "{{ pass }}"
+      when: inventory_hostname in groups['asa']
+
+    - name: Nexus User Update
+      nxos_user:
+         name: "{{ ansible_user }}"
+         configured_password: "{{ new_pass }}"
+         update_password: always
+         state: present
+      when: inventory_hostname in groups['nxos']
+
+
+    - name: Controller User Update
+      aireos_config:
+        lines:
+          - netuser password "{{ user }}" "{{ new_pass }}"
+          - ap mgmuser add "{{ user }}" "{{ new_pass }}"
+      provider:
+        username: "{{ user }}"
+        password: "{{ pass }}"
+      when: inventory_hostname in groups['wlc']
