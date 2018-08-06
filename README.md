@@ -4,6 +4,8 @@ Ansible Cisco Tools
 -------------------------------------
    
 
+_Note: I do have an inventory script for these but there's too many properitary work things in it to just drop it out in the open. I'll be adding it at a later time with less stuff in it.
+
 Each of these is using network cli the suggested set up for the inventor log in is below.
 I dropped in a timeout due to some of the commands/functions taking a decent amount of time that being said you don't want it to automatically timeout. The base time out will always be 10.
 
