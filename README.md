@@ -108,7 +108,8 @@ pass=password
 ```
 
 
-
+Some things to note about the odd things in the playbook. ASA module isn't owned by ansible(yet) there is a bug I threw in with the two dev's involved in this. The command for username change requires the actuall name typed in I used *admin* for this example as a place holder. No one has responded to the bug yet, but the last workshop with ansible I was in they said there's going to be an updated module or maybe they would take that one. ASA's are fairly important for vpn and firewall so I imagine it would be considtered important to pick up at some point.   
+The wlc connection has to be ansible connection where the ASA has to be set up with just the word connection. I don't really know why past, it is what it is?
 
 
 
