@@ -1,0 +1,39 @@
+- name: Upgrade a Cisco IOS router
+  gather_facts: false
+  hosts: all
+  connection: network_cli
+
+  tasks:
+
+     - name: Check if bin or full install
+       ios_command:
+         commands:
+           - show boot | i variable
+       tags: show
+       register: pack
+       when: inventory_hostname in groups['IOS']
+
+     - name: Clean up, Copy install, Reboot only to fully install 3850's 
+       ios_command:
+         commands:
+           - software clean force
+           - software install file http://ipaddr/images/image.bin
+       when: inventory_hostname in groups['IOS'] and "flash:packages.conf" in  pack.stdout[0]
+
+     - name: Clean up, Expand install, Reboot only to fully install 3850's. Expand Required
+       ios_command:
+         commands:
+           - 'software clean file flash: force'
+           - 'software expand file http://ipaddr/images/image.bin.bin to flash: '
+       when: inventory_hostname in groups['IOS'] and "flash:packages.conf" not in pack.stdout[0]
+
+     - name: Set boot configs for expantion
+       ios_config:
+         lines:
+           - no boot system
+           - boot system flash:packages.conf
+           - do write memory
+           - do show boot
+       when: inventory_hostname in groups['IOS'] and "flash:packages.conf" not in pack.stdout[0]
+
+ 
