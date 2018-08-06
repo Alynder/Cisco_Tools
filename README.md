@@ -1,5 +1,7 @@
-# Cisco_Tools
+## Cisco_Tools
+-------------------------------
 Ansible Cisco Tools   
+-------------------------------------
    
 
 Each of these is using network cli the suggested set up for the inventor log in is below.
@@ -8,8 +10,8 @@ I dropped in a timeout due to some of the commands/functions taking a decent amo
 
 Upgrade.yaml:
 
-Examlpe inventory conf
- 
+> Example inventory conf
+``` 
 [all:vars]     
 connection: network_cli   
 ansible_user: current_user   
@@ -22,7 +24,6 @@ ansible_persistent_command_timeout: 5000
 
 [IOS]  
 10.0.0.0  
+```
 
-
-  
 Does 3850 upgrades from the http server based on what install is required. Not all of the same hardware version takes the same commands. This checks to see if a bin expend needs to happen versus the full install command.
