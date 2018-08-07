@@ -1,3 +1,4 @@
+---
 - name: Upgrade a Cisco IOS router
   gather_facts: false
   hosts: all
