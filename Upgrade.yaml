@@ -14,12 +14,12 @@
        register: pack
        when: inventory_hostname in groups['IOS']
 
-     - name: Clean up, Copy install, Reboot only to fully install 3850's 
+     - name: Clean up, Copy install, Reboot by hand only to fully install 3850's 
        ios_command:
          commands:
            - software clean force
            - software install file http://ipaddr/images/image.bin
-       when: inventory_hostname in groups['IOS'] and "flash:packages.conf" in  pack.stdout[0]
+       when: inventory_hostname in groups['IOS'] and "flash:packages.conf" in pack.stdout[0]
 
      - name: Clean up, Expand install, Reboot only to fully install 3850's. Expand Required
        ios_command:
