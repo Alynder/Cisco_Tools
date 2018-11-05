@@ -1,0 +1,33 @@
+--- 
+
+- name: Gather info
+  hosts: wlc
+  connection: local
+
+  tasks:
+
+    - name: Config 
+      aireos_config:
+        lines: 
+          - paging disable 
+        provider: 
+          username: "{{ user }}"
+          password: "{{ pass }}"
+ 
+    - name: Gather
+      aireos_command:
+        commands:
+           - show ap summary
+        provider: 
+          username: "{{ user }}"
+          password: "{{ pass }}"
+      register: aps
+      ignore_errors: True 
+
+    - name: Gather
+      copy: 
+        content: "{{ aps }}" 
+        dest: ./aplist
+
+    - name: Kick garbage output script
+      script: ./convert.sh
